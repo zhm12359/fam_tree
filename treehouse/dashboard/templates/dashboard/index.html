@@ -1,13 +1,27 @@
-{% extends 'dashboard/base.html' %}
 
+{% extends 'dashboard/base.html' %}
+{% load static %}
 {% block content %}
 
     <h1>Person</h1>
-    {% for person in persons %}
 
-        <p> {{person.name}} </p>
+    <div id="mynetwork"></div>
 
-        </div>
-    {% endfor %}
+
+    <script src="{% static 'dashboard/data_vis.js' %}"></script>
+    <script>
+        var everything = [];
+        {% for p in persons %}
+            var temp = Object.assign({}, {
+                name : '{{ p.name }}',
+                big : '{{ p.big }}',
+                big_2: '{{ p.big_2 }}',
+                assistant_big: '{{ p.assistant_big }}',
+                assistant_big: '{{ p.assistant_big_2 }}'
+            })
+            everything.push(temp);
+        {% endfor %}
+        run_data_vis(everything);
+    </script>
 
 {% endblock %}
