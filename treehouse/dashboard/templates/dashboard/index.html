@@ -1,23 +1,13 @@
-<html>
-<head>
-    <title>Dashboard</title>
-</head>
-<body>
-    <h1>{{header}}</h1>
+{% extends 'dashboard/base.html' %}
 
-    <p> Upload excel</p>
-    {% if form.errors %}
-        <p style="color: red;">
-            Please correct the error{{ form.errors|pluralize }} below.
-        </p>
-    {% endif %}
+{% block content %}
 
-    <form action="" enctype="multipart/form-data"  method="post">
-        <table>
-            {{ form.as_table }}
-        </table>
-        {% csrf_token %}
-        <input type="submit" value="Submit">
-    </form>
-</body>
-</html>
+    <h1>Person</h1>
+    {% for person in persons %}
+
+        <p> {{person.name}} </p>
+
+        </div>
+    {% endfor %}
+
+{% endblock %}

@@ -14,9 +14,10 @@ class UploadFileForm(forms.Form):
     file = forms.FileField()
 
 
-class IndexView(generic.DetailView):
-    model = Person
-    template_name = 'polls/detail.html'
+def IndexView(request):
+    persons = Person.objects.all()[:]
+
+    return render(request, 'dashboard/index.html', {'persons': persons})
 
 
 def ImportView(request):
