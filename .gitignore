@@ -7,3 +7,6 @@ db.sqlite3
 __pycache__
 sandbox
 env
+inputs
+frontend
+backend
