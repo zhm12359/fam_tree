@@ -1,13 +1,33 @@
-<body>
-    <div class="page-header">
-        <h1><a href="/dashboard">PCT Family Tree Visualization</a></h1>
-    </div>
-    <div class="content container">
-        <div class="row">
-            <div class="col-md-8">
-            {% block content %}
-            {% endblock %}
+<!doctype html>
+<html>
+    <head>
+        <title>Network | Basic usage</title>
+
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.bundle.min.js" integrity="sha384-VspmFJ2uqRrKr3en+IG0cIq1Cl/v/PHneDw6SQZYgrcr8ZZmZoQ3zhuGfMnSR/F2" crossorigin="anonymous"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+        <style type="text/css">
+        #mynetwork {
+          width: 600px;
+          height: 400px;
+          border: 1px solid lightgray;
+        }
+        </style>
+    </head>
+
+    <body>
+        <div class="page-header">
+            <h1><a href="/dashboard">PCT Family Tree Visualization</a></h1>
+        </div>
+        <div class="content container">
+            <div class="row">
+                <div class="col-md-8">
+                {% block content %}
+                {% endblock %}
+                </div>
             </div>
         </div>
-    </div>
-</body>
+    </body>
+
+</html>
