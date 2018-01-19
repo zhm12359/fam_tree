@@ -19,6 +19,11 @@ def IndexView(request):
 
     return render(request, 'dashboard/index.html', {'persons': persons})
 
+def BigTreeView(request):
+    persons = Person.objects.all()[:]
+
+    return render(request, 'dashboard/BigTreeView.html', {'persons': persons})
+
 
 def ImportView(request):
     if request.method == 'POST':
@@ -39,11 +44,17 @@ def ImportView(request):
             big = row[0].value
             if(name and name!="Little"):
 
+                if not Person.objects.filter(name=big).exists():
+                    b = Person(name=big)
+                    b.save()
+
                 if(Person.objects.filter(name=name).exists()):
                     p = Person.objects.get(name=name)
                     p.big_2 = big
                 else:
                     p = Person(name=name,big=big)
+
+
                 p.save()
 
         a_big_table = wb['AB']
@@ -52,6 +63,12 @@ def ImportView(request):
             name = row[1].value
             a_big = row[0].value
             if (name and name != "Little" and big!="AB"):
+
+
+                if not Person.objects.filter(name=a_big).exists():
+                    b = Person(name=a_big)
+                    b.save()
+
                 if (Person.objects.filter(name=name).exists()):
                     p = Person.objects.get(name=name)
                     print(p)
