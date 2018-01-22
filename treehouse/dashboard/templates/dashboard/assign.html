@@ -1,0 +1,50 @@
+{% extends 'dashboard/base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>All Paths in the family tree</h1>
+
+<ol>
+{% for path, abs in paths %}
+
+
+    <li>
+
+        {% for name in path %}
+
+            {% if forloop.last %}
+
+            {{name}}
+
+            {% else %}
+
+            {{name}} ->
+
+            {% endif %}
+
+
+        {% endfor %}
+
+        <br>
+        <h6>ABs:</h6>
+
+        <ul>
+
+            {% for ab in abs %}
+
+                <li> {{ ab }}</li>
+
+            {% endfor %}
+
+        </ul>
+
+
+    </li>
+    <br>
+
+
+
+{% endfor %}
+</ol>
+
+{% endblock %}

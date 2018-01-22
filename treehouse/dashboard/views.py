@@ -7,7 +7,7 @@ from .models import Person
 
 from openpyxl import load_workbook
 
-
+import json
 
 
 class UploadFileForm(forms.Form):
@@ -24,6 +24,59 @@ def BigTreeView(request):
 
     return render(request, 'dashboard/BigTreeView.html', {'persons': persons})
 
+def AssignView(request):
+    persons = Person.objects.all()[:]
+
+    data = {}
+    roots = [] #those who are not bigs
+
+    for p in persons:
+        data[p.name] = p
+
+        if not Person.objects.filter(big=p.name).exists():
+            roots.append(p)
+
+
+    # print(roots)
+    paths = []
+
+    for r in roots:
+        temp = [r.name]
+
+        big = r.big
+
+        while Person.objects.filter(name=big).exists() and big!="":
+            if not big:
+                break
+            temp.append(big)
+            tp = Person.objects.get(name=big)
+            big = tp.big
+
+        paths.append(temp)
+
+    # print("paths: " )
+    # print(paths)
+
+    print("p obj")
+    print(data)
+
+
+    abs = []
+
+    for path in paths:
+        temp = []
+        for p in path:
+            if data[p].assistant_big:
+                temp.append( p + "->" + data[p].assistant_big )
+            if data[p].assistant_big_2:
+                temp.append( p + "->" + data[p].assistant_big_2 )
+        abs.append(temp)
+
+    result = []
+    for i in range(0, len(paths)):
+        result.append( [paths[i], abs[i]] )
+
+    return render(request, 'dashboard/assign.html', {'persons': persons, 'person_obj': data, 'paths': result })
 
 def ImportView(request):
     if request.method == 'POST':
@@ -50,11 +103,12 @@ def ImportView(request):
 
                 if(Person.objects.filter(name=name).exists()):
                     p = Person.objects.get(name=name)
-                    p.big_2 = big
+                    if not p.big:
+                        p.big = big
+                    else:
+                        p.big_2 = big
                 else:
                     p = Person(name=name,big=big)
-
-
                 p.save()
 
         a_big_table = wb['AB']

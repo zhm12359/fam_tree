@@ -20,10 +20,11 @@ function run_data_vis(persons){
     // define the Link template
     myDiagram.linkTemplate =
       $(go.Link,
-        {
-          selectable: false,      // links cannot be selected by the user
-          curve: go.Link.Bezier,
-          layerName: "Background"  // don't cross in front of any nodes
+        {      // links cannot be selected by the user
+          // curve: go.Link.Bezier,
+          layerName: "Background",
+            routing: go.Link.Orthogonal,  // may be either Orthogonal or AvoidsNodes
+            curve: go.Link.JumpOver// don't cross in front of any nodes
         },
         $(go.Shape,  // this shape only shows when it isHighlighted
           { isPanelMain: true, stroke: null, strokeWidth: 5 },
@@ -51,10 +52,10 @@ function run_data_vis(persons){
 
         node_list.push({key: cur.id, name: cur.name});
 
-        if(persons_obj[cur.big]) edge_list.push({from: cur.id,  to: persons_obj[cur.big].id, color:"red" });
-        if(persons_obj[cur.big_2]) edge_list.push({from: cur.id, to: persons_obj[cur.big_2].id, color:"red" });
-        if(persons_obj[cur.assistant_big]) edge_list.push({from: cur.id, to: persons_obj[cur.assistant_big].id, color:"black" });
-        if(persons_obj[cur.assistant_big_2]) edge_list.push({from: cur.id, to: persons_obj[cur.assistant_big_2].id, color:"black" });
+        if(persons_obj[cur.big]) edge_list.push({from: cur.id,  to: persons_obj[cur.big].id, color:"black" });
+        if(persons_obj[cur.big_2]) edge_list.push({from: cur.id, to: persons_obj[cur.big_2].id, color:"black" });
+        if(persons_obj[cur.assistant_big]) edge_list.push({from: cur.id, to: persons_obj[cur.assistant_big].id, color:"red" });
+        if(persons_obj[cur.assistant_big_2]) edge_list.push({from: cur.id, to: persons_obj[cur.assistant_big_2].id, color:"red" });
 
     }
 
