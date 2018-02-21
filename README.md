@@ -110,6 +110,92 @@ The {% static %} template tag generates the absolute URL of static files.
 
 Background image
 
+PIP and virturalENV
+
+pip is the reference Python package manager
+
+install
+python3 -m pip install --user --upgrade pip
+
+virtualenv is used to manage Python packages for different projects. Using virtualenv allows you to avoid installing Python packages globally which could break system tools or other projects.
+
+install
+python3 -m pip install --user virtualenv
+
+creating virtualenv
+python3 -m virtualenv env
+
+The second argument is the location to create the virtualenv. Generally, you can just create this in your project and call it env.
+
+virtualenv will create a virtual Python installation in the env folder (or whatever you named it).
+
+ You should exclude your virtualenv directory from your version control system using .gitignore or similar.
+ 
+ activate env
+ 
+ source env/bin/activate
+ 
+ You can confirm you’re in the virtualenv by checking the location of your Python interpreter, it should point to the env directory.
+ 
+ check if in env:
+ 
+  which python
+ 
+ leave virtualenv:
+ 
+   deactivate
+ 
+ pip allows you to specify which version of a package to install using version specifiers. For example, to install a specific version of requests:
+
+pip install requests==2.18.4
+To install the latest 2.x release of requests:
+
+pip install requests>=2.0.0,<3.0.0
+To install pre-release versions of packages, use the --pre flag:
+
+pip install --pre requests
+
+TLDR
+
+Installing from local archives¶
+If you have a local copy of a Distribution Package’s archive (a zip, wheel, or tar file) you can install it directly with pip:
+
+pip install requests-2.18.4.tar.gz
+If you have a directory containing archives of multiple packages, you can tell pip to look for packages there and not to use the Python Package Index (PyPI) at all:
+
+pip install --no-index --find-links=/local/dir/ requests
+This is useful if you are installing packages on a system with limited connectivity or if you want to strictly control the origin of distribution packages.
+
+Using other package indexes
+If you want to download packages from a different index than the Python Package Index (PyPI), you can use the --index-url flag:
+
+pip install --index-url http://index.example.com/simple/ SomeProject
+If you want to allow packages from both the Python Package Index (PyPI) and a separate index, you can use the --extra-index-url flag instead:
+
+pip install --extra-index-url http://index.example.com/simple/ SomeProject
+
+/TLDR
+
+Upgrade package
+pip install --upgrade ...
+
+nstead of installing packages individually, pip allows you to declare all dependencies in a Requirements File. For example you could create a requirements.txt file containing:
+
+requests==2.18.4
+google-auth==1.1.0
+And tell pip too install all of the packages in this file using the -r flag:
+
+pip install -r requirements.txt
+
+Pip can export a list of all installed packages and their versions using the freeze command:
+
+pip freeze
+
+
+ 
+ 
+ 
+ 
 
  
 
