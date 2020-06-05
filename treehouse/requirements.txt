@@ -5,7 +5,7 @@ coreschema==0.0.4
 diff-match-patch==20121119
 Django==1.11.29
 django-filter==1.1.0
-djangorestframework==3.7.7
+djangorestframework==3.9.1
 djangorestframework-simplejwt==3.2
 et-xmlfile==1.0.1
 idna==2.6
